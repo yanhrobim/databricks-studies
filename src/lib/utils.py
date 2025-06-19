@@ -7,9 +7,18 @@ def table_exists(spark, catalog, database, table):
             .count())
     return count == 1
 
-def import_schema(tablename):
-    with open(f"{tablename}_schema.json", "r") as open_file:
+def import_schema_cdc(tablename):
+    with open(f"{tablename}_schema_cdc.json", "r") as open_file:
             schema_json = json.load(open_file)  # Le o JSON e retorna em forma dicionário.
             
-    df_schema = types.StructType.fromJson(schema_json)  # Definindo Schema Dataframe com StructType.
+    df_schema = types.StructType.fromJson(schema_json)  # Definindo Schema Dataframe 
+ # com StructType.
+    return df_schema
+
+def import_schema_full(tablename):
+    with open(f"{tablename}_schema_full.json", "r") as open_file:
+            schema_json = json.load(open_file)  # Le o JSON e retorna em forma dicionário.
+            
+    df_schema = types.StructType.fromJson(schema_json)  # Definindo Schema Dataframe
+# com StructType.
     return df_schema
