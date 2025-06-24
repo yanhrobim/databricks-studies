@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "databricks"
+version = "0.1.0"
+description = ""
+authors = ["Yan Robim <yanrobim@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+dotenv = "^0.9.9"
+requests = "^2.32.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
