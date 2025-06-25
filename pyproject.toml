@@ -6,7 +6,7 @@ authors = ["Yan Robim <yanrobim@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
+python = "^3.11"
 dotenv = "^0.9.9"
 requests = "^2.32.4"
 
