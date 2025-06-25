@@ -7,10 +7,11 @@
     },
     "webhook_notifications": {},
     "timeout_seconds": 0,
-    "schedule": {
-      "quartz_cron_expression": "52 00 00 * * ?",
-      "timezone_id": "America/Sao_Paulo",
-      "pause_status": "UNPAUSED"
+    "trigger": {
+      "pause_status": "UNPAUSED",
+      "file_arrival": {
+        "url": "/Volumes/raw/olist_ecommerce/cdc/"
+      }
     },
     "max_concurrent_runs": 1,
     "tasks": [
