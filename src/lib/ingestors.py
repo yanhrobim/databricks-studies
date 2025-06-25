@@ -52,7 +52,6 @@ class IngestionCDC(Ingestion_Full_Load_In_Bronze):
             
         def upsert(self, df):
 
-            df.drop("modifed_at")
             df.createOrReplaceGlobalTempView(f"view_{self.tablename}")   # Global View pode ser acessada de qualquer sessão do Spark, pois é uma View Global.
 
             query = f''' 
