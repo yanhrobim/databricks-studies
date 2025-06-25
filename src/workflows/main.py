@@ -36,7 +36,7 @@ def main():
             print(f"Job '{i}' atualizado com sucesso!")
 
         else:
-            print(f"Não foi possivel atualizar o Job '{i}'")
+            print(f"Não foi possivel atualizar o Job '{i}'. Error: {resp.text}")
 
 if __name__ == "__main__":
     main()
