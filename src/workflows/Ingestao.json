@@ -8,7 +8,7 @@
     "webhook_notifications": {},
     "timeout_seconds": 0,
     "trigger": {
-      "pause_status": "PAUSED",
+      "pause_status": "UNPAUSED",
       "file_arrival": {
         "url": "/Volumes/raw/olist_ecommerce/cdc/"
       }
