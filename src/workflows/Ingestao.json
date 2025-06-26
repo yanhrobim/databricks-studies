@@ -77,7 +77,7 @@
         "notebook_task": {
           "notebook_path": "src/silver/ingestion_silver",
           "base_parameters": {
-            "tablename": "cliente"
+            "tablename": "clientes"
           },
           "source": "GIT"
         },
