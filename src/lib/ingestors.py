@@ -1,4 +1,4 @@
-wimport delta
+import delta
 import utils
 
 class Ingestion_Full_Load_In_Bronze:
