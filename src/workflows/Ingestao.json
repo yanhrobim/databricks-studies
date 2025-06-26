@@ -65,6 +65,66 @@
         "timeout_seconds": 0,
         "email_notifications": {},
         "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_cliente",
+        "depends_on": [
+          {
+            "task_key": "bronze_customers"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "cliente"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0624-123410-2xk4t93h",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_pagamento_pedidos",
+        "depends_on": [
+          {
+            "task_key": "bronze_order_payments"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "pagamento_pedidos"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0624-123410-2xk4t93h",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_pedidos",
+        "depends_on": [
+          {
+            "task_key": "bronze_orders"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "pedidos"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0624-123410-2xk4t93h",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
       }
     ],
     "git_source": {
