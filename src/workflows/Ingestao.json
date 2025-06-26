@@ -8,7 +8,7 @@
     "webhook_notifications": {},
     "timeout_seconds": 0,
     "trigger": {
-      "pause_status": "UNPAUSED",
+      "pause_status": "PAUSED",
       "file_arrival": {
         "url": "/Volumes/raw/olist_ecommerce/cdc/"
       }
@@ -19,7 +19,7 @@
         "task_key": "bronze_customers",
         "run_if": "ALL_SUCCESS",
         "notebook_task": {
-          "notebook_path": "src/bronze/IngestÃ£o",
+          "notebook_path": "src/bronze/ingestion_bronze",
           "base_parameters": {
             "tablename": "customers",
             "id_field": "customer_id",
@@ -36,7 +36,7 @@
         "task_key": "bronze_order_payments",
         "run_if": "ALL_SUCCESS",
         "notebook_task": {
-          "notebook_path": "src/bronze/IngestÃ£o",
+          "notebook_path": "src/bronze/ingestion_bronze",
           "base_parameters": {
             "tablename": "order_payments",
             "id_field": "order_id",
@@ -53,7 +53,7 @@
         "task_key": "bronze_orders",
         "run_if": "ALL_SUCCESS",
         "notebook_task": {
-          "notebook_path": "src/bronze/IngestÃ£o",
+          "notebook_path": "src/bronze/ingestion_bronze",
           "base_parameters": {
             "tablename": "orders",
             "id_field": "order_id",
