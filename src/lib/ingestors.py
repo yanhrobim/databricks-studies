@@ -93,3 +93,78 @@ class IngestionCDC(Ingestion_Full_Load_In_Bronze):
                         # faz a mesclagem com Merge e salva na base bronze (deltatable).
                         .trigger(availableNow=True))
             return stream.start()
+        
+class IngestionCDF(IngestionCDC):
+    def __init__(self, spark, catalog, schemaname, tablename, id_field, idfield_old):
+        super().__init__(spark=spark, 
+                         catalog=catalog, 
+                         schemaname=schemaname, 
+                         tablename=tablename,
+                         data_format='delta', 
+                         id_field=id_field, 
+                         timestamp_field='_commit_timestamp')
+        
+        self.set_query()
+        self.idfield_old = idfield_old
+        self.checkpoint_location = f"/Volumes/raw/{self.schemaname}/cdc/silver_{self.tablename}_checkpoint/"
+
+    def set_schema(self):
+        return
+    
+    def set_schema_cdc(self):
+        return
+
+    def set_query(self):        # Esta função, modifica a nossa query em .sql com o objetivo de deixar nossa query nos padrões
+                                # necessários para executar a ingestão de dados com Straming.
+
+        query = utils.import_query(f"{self.tablename}.sql")
+        self.from_table = utils.extract_from(query=query)
+        self.original_query = query
+        self.query = utils.format_query_cdf(query, "{df}")
+
+    def load(self):
+
+        df = (self.spark.readStream      # Fazendo a leitura do CDF da tabela customers em bronze.
+                   .format(self.data_format)
+                   .option("readChangeFeed", "true")
+                   .table(self.from_table))
+        
+        return df
+        
+    def save(self, df):
+
+        stream =  (df.writeStream
+             .option("checkpointLocation", self.checkpoint_location)
+             .foreachBatch(lambda df, batchID: self.upsert(df))
+             .trigger(availableNow=True)   # Percorrer a todas mudanças e quando acabar,
+                                           # ele desliga a Straming
+            )
+        
+        return stream.start()
+        
+    def upsert(self, df,):      # Coração de tudo.
+
+        df.createOrReplaceGlobalTempView(f"temp_silver_{self.tablename}")
+        
+        query_last = f"""
+        SELECT *
+        FROM global_temp.temp_silver_{self.tablename}
+        WHERE _change_type <> 'update_preimage'
+        QUALIFY ROW_NUMBER() OVER (PARTITION BY {self.idfield_old} ORDER BY {self.timestamp_field} DESC) = 1
+        """     # Pegando última atualização dos dados.
+        
+        df_last = self.spark.sql(query_last)  # Nesta query, pegamos a última atualização do nosso dado em CDF.
+
+        df_upsert = self.spark.sql(self.query, df=df_last)    # Aqui, juntamos a nossa Tabela em .sql, com os resultados
+                                                         # da nossa query_last(CDF)
+        
+        (self.deltatable.alias("s")
+                    .merge(df_upsert.alias("b"), f"s.{self.id_field} = b.{self.id_field}")
+                    .whenMatchedDelete(condition = "b._change_type = 'delete'")
+                    .whenMatchedUpdateAll(condition = "b._change_type = 'update_postimage'")
+                    .whenNotMatchedInsertAll(condition = "b._change_type = 'insert' OR b._change_type = 'update_postimage'")
+                    .execute())
+
+    def execute(self):
+        df = self.load()
+        return self.save(df)
