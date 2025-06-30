@@ -55,17 +55,3 @@ if remove_checkpoint == True:
 
 
 stream = ingest.execute()
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC SELECT COUNT(*) FROM bronze.olist_ecommerce.order_payments
-# MAGIC
-# MAGIC UNION ALL
-# MAGIC
-# MAGIC SELECT COUNT(*) FROM silver.olist_ecommerce.pagamento_pedidos
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC drop table silver.olist_ecommerce.pagamento_pedidos
