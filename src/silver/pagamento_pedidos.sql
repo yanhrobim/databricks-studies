@@ -1,5 +1,5 @@
 SELECT
-          order_id                  AS IdPedido,
+          order_id                  AS IdPagamento,
           payment_sequential        AS sequencia_pagamento,
           payment_type              AS tipo_pagamento,
           payment_installments      AS parcelas_pagamento,
