@@ -34,8 +34,9 @@ def import_query(path):
 def extract_from(query: str):
     tablename = (query.lower()       # Transforma toda query em minúscula.
                       .split("from")[1]  # Pega todas strings a partir do from da query.
-                      .strip()   # Remove todos os espaços em brancos da string. 
-                      .split(" ")[0]   # Se contiver mais resultados depois do from, pega apenas o primeiro.
+                      .strip()
+                      .split(" ")[0]    # Remove todos os espaços em brancos da string. 
+                      .split("\n")[0]   # Se contiver mais resultados depois do from, pega apenas o primeiro.
                                        # (Sendo a tabela na camada bronze.)
                       .strip())  # Remove todos os espaços em brancos da string novamente.
     return tablename
