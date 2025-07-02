@@ -122,7 +122,7 @@
           "notebook_path": "src/silver/ingestion_silver",
           "base_parameters": {
             "tablename": "pedidos",
-            "id_field" : "IdPedidos",
+            "id_field" : "IdPedido",
             "idfield_old": "order_id"
           },
           "source": "GIT"
