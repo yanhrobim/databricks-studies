@@ -12,13 +12,14 @@ class Ingestion_Full_Load_In_Bronze:
 
 
         def set_schema(self):
-            self.df_schema_full = utils.import_schema_full(self.tablename)
+            self.df_schema_full = utils.import_schema(self.tablename)
         
         def load(self, path):
             df = (self.spark
                       .read
                       .format(self.data_format)
                       .option("header", "true")
+                      .option("sep", ";")
                       .schema(self.df_schema_full)
                       .load(path))
             return df
@@ -44,7 +45,7 @@ class IngestionCDC(Ingestion_Full_Load_In_Bronze):
             self.set_deltatable()
 
         def set_schema_cdc(self):
-            self.df_schema_cdc = utils.import_schema_cdc(self.tablename)
+            self.df_schema_cdc = utils.import_schema(self.tablename)
 
         def set_deltatable(self):
             tablename =  f"{self.catalog}.{self.schemaname}.{self.tablename}"

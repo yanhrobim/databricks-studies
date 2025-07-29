@@ -11,7 +11,7 @@ import ingestors
 # COMMAND ----------
 
 catalog = 'bronze'
-schemaname = 'olist_ecommerce'
+schemaname = 'upsell'
 
 tablename = dbutils.widgets.get('tablename')
 id_field = dbutils.widgets.get('id_field')
