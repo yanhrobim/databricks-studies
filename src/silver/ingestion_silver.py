@@ -30,7 +30,7 @@ if not utils.table_exists(spark, catalog, schemaname, tablename):
         .format("delta")
         .mode("overwrite")
         .option("OverWriteSchema", "true")
-        .saveAsTable(f"silver.olist_ecommerce.{tablename}")
+        .saveAsTable(f"silver.upsell.{tablename}")
     )
 
     remove_checkpoint = True
