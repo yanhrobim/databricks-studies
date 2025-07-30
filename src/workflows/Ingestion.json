@@ -64,6 +64,72 @@
         "timeout_seconds": 0,
         "email_notifications": {},
         "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_customers",
+        "depends_on": [
+          {
+            "task_key": "bronze_clientes"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "customers",
+            "idfield_old": "idCliente",
+            "id_field": "idCustomer"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0729-115515-55r2u8eq",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_product_transaction",
+        "depends_on": [
+          {
+            "task_key": "bronze_transacao_produto"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "product_transaction",
+            "idfield_old": "IdTransacaoProduto",
+            "id_field": "idProductTransaction"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0729-115515-55r2u8eq",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
+      },
+      {
+        "task_key": "silver_transactions",
+        "depends_on": [
+          {
+            "task_key": "bronze_transactions"
+          }
+        ],
+        "run_if": "ALL_SUCCESS",
+        "notebook_task": {
+          "notebook_path": "src/silver/ingestion_silver",
+          "base_parameters": {
+            "tablename": "transactions",
+            "idfield_old": "IdTransacao",
+            "id_field": "idTransaction"
+          },
+          "source": "GIT"
+        },
+        "existing_cluster_id": "0729-115515-55r2u8eq",
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "webhook_notifications": {}
       }
     ],
     "git_source": {

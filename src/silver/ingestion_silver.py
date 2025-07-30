@@ -12,7 +12,7 @@ import ingestors
 # DBTITLE 1,Ingestão Full Load
 
 catalog =  "silver"
-schemaname =  "olist_ecommerce"
+schemaname =  "upsell"
 tablename = dbutils.widgets.get("tablename")
 idfield_old = dbutils.widgets.get("idfield_old")
 id_field = dbutils.widgets.get("id_field")
@@ -30,7 +30,7 @@ if not utils.table_exists(spark, catalog, schemaname, tablename):
         .format("delta")
         .mode("overwrite")
         .option("OverWriteSchema", "true")
-        .saveAsTable(f"silver.olist_ecommerce.{tablename}")
+        .saveAsTable(f"silver.upsell.{tablename}")
     )
 
     remove_checkpoint = True
