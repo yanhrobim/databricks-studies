@@ -113,7 +113,7 @@
         "task_key": "silver_transactions",
         "depends_on": [
           {
-            "task_key": "bronze_transactions"
+            "task_key": "bronze_transacoes"
           }
         ],
         "run_if": "ALL_SUCCESS",
