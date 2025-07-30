@@ -60,7 +60,6 @@
           },
           "source": "GIT"
         },
-        
         "existing_cluster_id": "0729-115515-55r2u8eq",
         "timeout_seconds": 0,
         "email_notifications": {},
@@ -100,8 +99,8 @@
           "notebook_path": "src/silver/ingestion_silver",
           "base_parameters": {
             "tablename": "product_transaction",
-            "idfield_old": "idTransacaoProduto",
-            "id_field": "IdProductTransaction"
+            "idfield_old": "IdTransacaoProduto",
+            "id_field": "idProductTransaction"
           },
           "source": "GIT"
         },
@@ -114,7 +113,7 @@
         "task_key": "silver_transactions",
         "depends_on": [
           {
-            "task_key": "bronze_transacoes"
+            "task_key": "bronze_transactions"
           }
         ],
         "run_if": "ALL_SUCCESS",
@@ -123,7 +122,7 @@
           "base_parameters": {
             "tablename": "transactions",
             "idfield_old": "IdTransacao",
-            "id_field": "IdTransaction"
+            "id_field": "idTransaction"
           },
           "source": "GIT"
         },
@@ -136,7 +135,7 @@
     "git_source": {
       "git_url": "https://github.com/yanhrobim/databricks-studies",
       "git_provider": "gitHub",
-      "git_branch": "main"
+      "git_branch": "feat/refact_silver"
     },
     "queue": {
       "enabled": true
