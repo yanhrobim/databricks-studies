@@ -12,7 +12,7 @@ import ingestors
 # DBTITLE 1,Ingestão Full Load
 
 catalog =  "silver"
-schemaname =  "olist_ecommerce"
+schemaname =  "upsell"
 tablename = dbutils.widgets.get("tablename")
 idfield_old = dbutils.widgets.get("idfield_old")
 id_field = dbutils.widgets.get("id_field")
