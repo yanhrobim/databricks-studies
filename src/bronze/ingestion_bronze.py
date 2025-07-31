@@ -5,6 +5,7 @@ import json
 
 sys.path.insert(0, "../lib/")   # Importando funções/classes da Lib.
 
+import json
 import utils
 import ingestors
 

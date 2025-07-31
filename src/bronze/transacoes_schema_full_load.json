@@ -1,0 +1,1 @@
+{"fields":[{"metadata":{},"name":"IdTransacao","nullable":true,"type":"string"},{"metadata":{},"name":"IdCliente","nullable":true,"type":"string"},{"metadata":{},"name":"DtCriacao","nullable":true,"type":"timestamp_ntz"},{"metadata":{},"name":"QtdePontos","nullable":true,"type":"integer"},{"metadata":{},"name":"DescSistemaOrigem","nullable":true,"type":"string"}],"type":"struct"}
